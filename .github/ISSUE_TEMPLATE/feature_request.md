@@ -2,8 +2,8 @@
 name: Feature request
 about: 과제 퀄리티와 사용성을 위해 요청하지 않은 기능을 추가하는 이슈 템플릿입니다.
 title: "[Feature] - (기능명)"
-labels: ''
-assignees: ''
+labels: enhancement
+assignees: arch-spatula
 
 ---
 
