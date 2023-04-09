@@ -1,5 +1,11 @@
 import { MouseEvent } from "react";
 
+/**
+ * @todo 1. 라우트 컴포넌트로 관심사 분리하기
+ * @todo 2. 버튼 컴포넌트 분리
+ * @todo 3. 환경변수 설정으로 개발환경, 배포환경 origin 분리하기
+ */
+
 function App() {
   const handleSignUp = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
