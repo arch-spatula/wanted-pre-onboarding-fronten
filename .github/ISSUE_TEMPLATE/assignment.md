@@ -1,8 +1,8 @@
 ---
 name: Assignment
-about: 원티드 과제 이슈 탬플릿입니다.
-title: ''
-labels: ''
+about: 원티드 과제 이슈 템플릿입니다.
+title: "[Assignment] - (과제명)"
+labels: enhancement
 assignees: arch-spatula
 
 ---
