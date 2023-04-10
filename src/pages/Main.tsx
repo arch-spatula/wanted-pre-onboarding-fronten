@@ -1,5 +1,9 @@
 import { MouseEvent } from "react";
 
+/**
+ * @todo 1. 버튼 컴포넌트 분리
+ */
+
 function Main() {
   const handleSignUp = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
