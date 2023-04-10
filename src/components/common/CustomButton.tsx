@@ -18,7 +18,8 @@ function CustomButton({ text, href, hierarchy, onClick }: CustomButtonProps) {
   let styling = "";
   switch (hierarchy) {
     case "primary":
-      styling = "w-40 rounded bg-green-500 px-4 py-2 text-white";
+      styling =
+        "w-40 rounded bg-green-500 px-4 py-2 text-white flex justify-center";
       break;
     case "secondary":
       styling =
