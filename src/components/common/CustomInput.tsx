@@ -1,28 +1,15 @@
 import { ChangeEvent, HTMLInputTypeAttribute, RefObject } from "react";
 
-/**
- *
- * @todo 1. 아래처럼 label은 독립적이고 id는 의존적이게 props를 갖도록 만드십시오.
- *
- * 에러 발생
- * <CustomInput value="adsf" onChange={(e) => {}} label="label" />
- * <CustomInput value="adsf" onChange={(e) => {}} id="id" />
- *
- * 정상동작
- * <CustomInput value="adsf" onChange={(e) => {}} />
- * <CustomInput value="adsf" onChange={(e) => {}} label="label" id="id" />
- *
- * crypto를 사용해서 id를 지정하면 매 렌더링마다 새로운 id가 지정됩니다. 메모리 낭비가 큽니다.
- */
-
 interface CustomInputProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   placeholder?: string;
   errorMessage?: string;
   type?: HTMLInputTypeAttribute;
-  label?: string;
-  id?: CustomInputProps["label"];
+  inputLabel?: {
+    label: string;
+    id: string;
+  };
   testId?: string;
   ref?:
     | ((instance: HTMLInputElement | null) => void)
@@ -31,6 +18,13 @@ interface CustomInputProps {
     | undefined;
 }
 
+/**
+ * crypto를 사용해서 id를 지정하면 매 렌더링마다 새로운 id가 지정됩니다. 메모리 낭비가 큽니다.
+ * @example
+ * <CustomInput value="adsf" onChange={(e) => {}} />
+ * <CustomInput value="adsf" onChange={(e) => {}} inputLabel={{ label: "label", id: "id" }} />
+ */
+
 function CustomInput({
   value,
   onChange,
@@ -38,15 +32,14 @@ function CustomInput({
   ref,
   placeholder,
   errorMessage,
-  label,
-  id = label,
+  inputLabel,
   testId,
 }: CustomInputProps) {
   return (
     <div className="flex h-28 flex-col">
-      {id && (
-        <label htmlFor={id}>
-          <h3 className="pb-2 text-xl">{label}</h3>
+      {inputLabel?.id && (
+        <label htmlFor={inputLabel?.id}>
+          <h3 className="pb-2 text-xl">{inputLabel?.label}</h3>
         </label>
       )}
       <input
@@ -56,7 +49,7 @@ function CustomInput({
         placeholder={placeholder}
         onChange={onChange}
         ref={ref}
-        {...(typeof id === "string" && { id })}
+        {...(typeof inputLabel?.id === "string" && { id: inputLabel?.id })}
         {...(testId && { "data-testid": testId })}
       />
       {errorMessage && (
