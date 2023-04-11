@@ -1,20 +1,33 @@
+import { CustomButton, CustomInput } from "../components";
+
 function Signup() {
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
-      <div>
-        <h1 className="text-3xl">회원가입</h1>
-        <h2>아이디</h2>
-        <input className="w-64 rounded-lg border border-gray-300 px-3 py-2" />
-        <p>헬퍼 텍스트</p>
-        <h2>비밀번호</h2>
-        <input className="w-64 rounded-lg border border-gray-300 px-3 py-2" />
-        <p>헬퍼 텍스트</p>
-        <h2>비밀번호 확인</h2>
-        <input className="w-64 rounded-lg border border-gray-300 px-3 py-2" />
-        <p>헬퍼 텍스트</p>
-        <button className="w-40 rounded bg-green-500 px-4 py-2 text-white">
-          제출
-        </button>
+      <h1 className="pb-2 text-3xl">회원가입</h1>
+      <div className="flex flex-col gap-4">
+        <CustomInput
+          value=""
+          placeholder="user@user.com"
+          onChange={(e) => {}}
+          label="아이디"
+          id="아이디"
+          errorMessage="헬퍼 텍스트"
+          testId="email-input"
+        />
+        <CustomInput
+          value=""
+          placeholder="8자리 이상 입력해주십시오."
+          onChange={(e) => {}}
+          label="비밀번호"
+          id="비밀번호"
+          errorMessage="헬퍼 텍스트"
+          testId="password-input"
+        />
+        <CustomButton
+          text="회원가입"
+          hierarchy="primary"
+          testId="signup-button"
+        />
       </div>
     </main>
   );
