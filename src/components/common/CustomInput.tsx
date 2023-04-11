@@ -11,7 +11,7 @@ interface CustomInputProps {
     id: string;
   };
   testId?: string;
-  ref?:
+  customRef?:
     | ((instance: HTMLInputElement | null) => void)
     | RefObject<HTMLInputElement>
     | null
@@ -29,7 +29,7 @@ function CustomInput({
   value,
   onChange,
   type = "text",
-  ref,
+  customRef,
   placeholder,
   errorMessage,
   inputLabel,
@@ -48,7 +48,7 @@ function CustomInput({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        ref={ref}
+        ref={customRef}
         {...(typeof inputLabel?.id === "string" && { id: inputLabel?.id })}
         {...(testId && { "data-testid": testId })}
       />
