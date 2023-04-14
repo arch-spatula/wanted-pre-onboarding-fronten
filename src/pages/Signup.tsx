@@ -1,21 +1,16 @@
-import { useRef } from "react";
 import { CustomButton, CustomInput } from "../components";
-import { useInput } from "../hooks";
-import { checkEmail, checkPassword, isValid } from "../utils";
+import { useSignup } from "../hooks";
 
 function Signup() {
-  const { inputValues, handleInputChange } = useInput<{
-    email: string;
-    password: string;
-  }>({ email: "", password: "" });
-
-  const emailRef = useRef<HTMLInputElement>(null);
-
-  const handleSignUp = () => {};
-
-  const validEmail = checkEmail(inputValues.email);
-  const validPassword = checkPassword(inputValues.password);
-  const disabled = !isValid(validEmail, validPassword);
+  const {
+    handleSignUp,
+    emailRef,
+    inputValues,
+    handleInputChange,
+    validEmail,
+    validPassword,
+    disabled,
+  } = useSignup();
 
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
@@ -45,7 +40,7 @@ function Signup() {
           hierarchy="primary"
           testId="signup-button"
           disabled={disabled}
-          onClick={handleSignUp}
+          onClick={() => handleSignUp(inputValues.email, inputValues.password)}
         />
       </div>
     </main>
