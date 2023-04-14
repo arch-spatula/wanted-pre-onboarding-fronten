@@ -1,6 +1,15 @@
 import { ChangeEvent, useState } from "react";
 
-function useInput<T>(inputGroup: T) {
+/**
+ * @param {{ [key: string]: string }} inputGroup
+ * @returns {{ handleInputChange, inputValues, resetAllInput, resetSpecificInput }}
+ * @example
+ * const { inputValues, handleInputChange } = useInput<{
+ *   id: string;
+ *   pw: string;
+ * }>({ id: "", pw: "" });
+ */
+function useInput<T extends { [key: string]: string }>(inputGroup: T) {
   const [inputValues, setInputValues] = useState(inputGroup);
 
   const handleInputChange = (field: keyof T) => {
