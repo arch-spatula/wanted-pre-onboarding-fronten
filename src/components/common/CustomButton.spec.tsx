@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import CustomButton from "./CustomButton";
 
 describe("CustomButton", () => {
@@ -23,5 +24,30 @@ describe("CustomButton", () => {
     render(<CustomButton text="회원가입" hierarchy="primary" href="/" />);
     const anchorElement = screen.getByRole("link");
     expect(anchorElement).toBeInTheDocument();
+  });
+
+  it("활성화되어 있는 동안에 클릭하면 기능을 수행할 수 있습니다.", () => {
+    const mockOnClick = jest.fn();
+    render(
+      <CustomButton text="회원가입" hierarchy="primary" onClick={mockOnClick} />
+    );
+    const button = screen.getByRole("button");
+    userEvent.click(button);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("비활성화되어 있는 동안에 클릭하면 기능을 수행할 수 없습니다.", () => {
+    const mockOnClick = jest.fn();
+    render(
+      <CustomButton
+        text="회원가입"
+        hierarchy="primary"
+        onClick={mockOnClick}
+        disabled={true}
+      />
+    );
+    const button = screen.getByRole("button");
+    userEvent.click(button);
+    expect(mockOnClick).toHaveBeenCalledTimes(0);
   });
 });
