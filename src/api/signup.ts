@@ -8,7 +8,6 @@ async function signup(email: string, password: string) {
       { email, password },
       { headers: { "Content-Type": "application/json" } }
     );
-
     if (res.status === 201) {
       return "";
     }
