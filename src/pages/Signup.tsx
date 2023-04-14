@@ -1,34 +1,42 @@
+import { useRef } from "react";
 import { CustomButton, CustomInput } from "../components";
 import { useInput } from "../hooks";
-import { checkEmail, checkPassword } from "../utils";
+import { checkEmail, checkPassword, isValid } from "../utils";
 
 function Signup() {
   const { inputValues, handleInputChange } = useInput<{
-    id: string;
-    pw: string;
-  }>({ id: "", pw: "" });
+    email: string;
+    password: string;
+  }>({ email: "", password: "" });
 
-  // 유효성 충족 전까지 버튼 비활성화
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  const handleSignUp = () => {};
+
+  const validEmail = checkEmail(inputValues.email);
+  const validPassword = checkPassword(inputValues.password);
+  const disabled = !isValid(validEmail, validPassword);
 
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
       <h1 className="pb-2 text-3xl">회원가입</h1>
       <div className="flex flex-col gap-4">
         <CustomInput
-          value={inputValues.id}
+          value={inputValues.email}
           placeholder="user@user.com"
-          onChange={handleInputChange("id")}
-          inputLabel={{ label: "아이디", id: "아이디" }}
-          errorMessage={checkEmail(inputValues.id)}
+          onChange={handleInputChange("email")}
+          inputLabel={{ label: "email", id: "email" }}
+          errorMessage={validEmail}
           testId="email-input"
           type="email"
+          customRef={emailRef}
         />
         <CustomInput
-          value={inputValues.pw}
+          value={inputValues.password}
           placeholder="8자리 이상 입력해주십시오."
-          onChange={handleInputChange("pw")}
-          inputLabel={{ label: "비밀번호", id: "비밀번호" }}
-          errorMessage={checkPassword(inputValues.pw)}
+          onChange={handleInputChange("password")}
+          inputLabel={{ label: "password", id: "password" }}
+          errorMessage={validPassword}
           testId="password-input"
           type="password"
         />
@@ -36,9 +44,8 @@ function Signup() {
           text="회원가입"
           hierarchy="primary"
           testId="signup-button"
-          disabled={
-            !!checkEmail(inputValues.id) || !!checkPassword(inputValues.pw)
-          }
+          disabled={disabled}
+          onClick={handleSignUp}
         />
       </div>
     </main>
