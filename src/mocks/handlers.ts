@@ -1,8 +1,8 @@
 import { rest } from "msw";
-import { baseURL } from "../constants/constant";
+import { baseURL, TODO_PATH } from "../constants/constants";
 
 export const handlers = [
-  rest.get(`${baseURL}/todo`, (req, res, ctx) => {
+  rest.get(`${baseURL + TODO_PATH}`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json([]));
   }),
 ];

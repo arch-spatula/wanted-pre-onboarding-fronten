@@ -1,3 +1,4 @@
+import { MAIN_PATH, SIGNIN_PATH, SIGNUP_PATH } from "../constants/constants";
 import { Main, NotFound, Signin, Signup } from "../pages";
 
 /**
@@ -5,11 +6,11 @@ import { Main, NotFound, Signin, Signup } from "../pages";
  */
 function Router() {
   switch (window.location.href) {
-    case window.origin + "/signin":
+    case window.origin + SIGNIN_PATH:
       return <Signin />;
-    case window.origin + "/signup":
+    case window.origin + SIGNUP_PATH:
       return <Signup />;
-    case window.origin + "/":
+    case window.origin + MAIN_PATH:
       return <Main />;
     default:
       return <NotFound />;
