@@ -1,48 +1,16 @@
-import { useRef, useState } from "react";
-import signup from "../api/signup";
 import { CustomButton, CustomInput } from "../components";
-import { SIGNIN_PATH } from "../constants/constants";
-import { useInput } from "../hooks";
-import {
-  checkEmail,
-  checkPassword,
-  checkTakenEmail,
-  isValid,
-  setPath,
-} from "../utils";
+import { useSignup } from "../hooks";
 
 function Signup() {
-  const { inputValues, handleInputChange } = useInput<{
-    email: string;
-    password: string;
-  }>({ email: "", password: "" });
-
-  const [takenEmail, setTakenEmail] = useState<string[]>([]);
-
-  const emailRef = useRef<HTMLInputElement>(null);
-
-  const handleSignUp = async () => {
-    const res = await signup(inputValues.email, inputValues.password);
-    if (res === "") {
-      sessionStorage.setItem(
-        "user",
-        JSON.stringify({
-          email: inputValues.email,
-          password: inputValues.password,
-        })
-      );
-      setPath(SIGNIN_PATH);
-    } else if (res === "동일한 이메일이 이미 존재합니다.") {
-      emailRef.current?.focus();
-      setTakenEmail((prev) => [...prev, inputValues.email]);
-    }
-  };
-
-  const validEmail =
-    checkEmail(inputValues.email) ||
-    checkTakenEmail(inputValues.email, takenEmail);
-  const validPassword = checkPassword(inputValues.password);
-  const disabled = !isValid(validEmail, validPassword);
+  const {
+    handleSignUp,
+    emailRef,
+    inputValues,
+    handleInputChange,
+    validEmail,
+    validPassword,
+    disabled,
+  } = useSignup();
 
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
@@ -72,7 +40,7 @@ function Signup() {
           hierarchy="primary"
           testId="signup-button"
           disabled={disabled}
-          onClick={handleSignUp}
+          onClick={() => handleSignUp(inputValues.email, inputValues.password)}
         />
       </div>
     </main>
