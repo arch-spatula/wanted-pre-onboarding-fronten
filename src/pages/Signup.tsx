@@ -1,20 +1,52 @@
+import { useRef } from "react";
+import { CustomButton, CustomInput } from "../components";
+import { useInput } from "../hooks";
+import { checkEmail, checkPassword, isValid } from "../utils";
+
 function Signup() {
+  const { inputValues, handleInputChange } = useInput<{
+    email: string;
+    password: string;
+  }>({ email: "", password: "" });
+
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  const handleSignUp = () => {};
+
+  const validEmail = checkEmail(inputValues.email);
+  const validPassword = checkPassword(inputValues.password);
+  const disabled = !isValid(validEmail, validPassword);
+
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
-      <div>
-        <h1 className="text-3xl">회원가입</h1>
-        <h2>아이디</h2>
-        <input className="w-64 rounded-lg border border-gray-300 px-3 py-2" />
-        <p>헬퍼 텍스트</p>
-        <h2>비밀번호</h2>
-        <input className="w-64 rounded-lg border border-gray-300 px-3 py-2" />
-        <p>헬퍼 텍스트</p>
-        <h2>비밀번호 확인</h2>
-        <input className="w-64 rounded-lg border border-gray-300 px-3 py-2" />
-        <p>헬퍼 텍스트</p>
-        <button className="w-40 rounded bg-green-500 px-4 py-2 text-white">
-          제출
-        </button>
+      <h1 className="pb-2 text-3xl">회원가입</h1>
+      <div className="flex flex-col gap-4">
+        <CustomInput
+          value={inputValues.email}
+          placeholder="user@user.com"
+          onChange={handleInputChange("email")}
+          inputLabel={{ label: "email", id: "email" }}
+          errorMessage={validEmail}
+          testId="email-input"
+          type="email"
+          customRef={emailRef}
+        />
+        <CustomInput
+          value={inputValues.password}
+          placeholder="8자리 이상 입력해주십시오."
+          onChange={handleInputChange("password")}
+          inputLabel={{ label: "password", id: "password" }}
+          errorMessage={validPassword}
+          testId="password-input"
+          type="password"
+        />
+        <CustomButton
+          text="회원가입"
+          hierarchy="primary"
+          testId="signup-button"
+          disabled={disabled}
+          onClick={handleSignUp}
+        />
       </div>
     </main>
   );

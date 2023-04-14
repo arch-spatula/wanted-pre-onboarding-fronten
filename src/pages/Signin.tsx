@@ -1,17 +1,45 @@
+import { CustomButton, CustomInput } from "../components";
+import { useInput } from "../hooks";
+import { checkEmail, checkPassword, isValid } from "../utils";
+
 function Signin() {
+  const { inputValues, handleInputChange } = useInput<{
+    id: string;
+    pw: string;
+  }>({ id: "", pw: "" });
+
+  const validEmail = checkEmail(inputValues.id);
+  const validPassword = checkPassword(inputValues.pw);
+  const disabled = !isValid(validEmail, validPassword);
+
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
-      <div>
-        <h1 className="text-3xl">로그인</h1>
-        <h2>아이디</h2>
-        <input className="w-64 rounded-lg border border-gray-300 px-3 py-2" />
-        <p>헬퍼 텍스트</p>
-        <h2>비밀번호</h2>
-        <input className="w-64 rounded-lg border border-gray-300 px-3 py-2" />
-        <p>헬퍼 텍스트</p>
-        <button className="w-40 rounded bg-green-500 px-4 py-2 text-white">
-          로그인
-        </button>
+      <h1 className="text-3xl">로그인</h1>
+      <div className="flex flex-col gap-4">
+        <CustomInput
+          value={inputValues.id}
+          placeholder="user@user.com"
+          onChange={handleInputChange("id")}
+          inputLabel={{ label: "아이디", id: "아이디" }}
+          errorMessage={validEmail}
+          testId="email-input"
+          type="email"
+        />
+        <CustomInput
+          value={inputValues.pw}
+          placeholder="8자리 이상 입력해주십시오."
+          onChange={handleInputChange("pw")}
+          inputLabel={{ label: "비밀번호", id: "비밀번호" }}
+          errorMessage={validPassword}
+          testId="password-input"
+          type="password"
+        />
+        <CustomButton
+          text="로그인"
+          hierarchy="primary"
+          testId="signin-button"
+          disabled={disabled}
+        />
       </div>
     </main>
   );
