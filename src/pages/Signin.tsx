@@ -43,6 +43,7 @@ function Signin() {
       default:
         localStorage.setItem("token", "Bearer " + res?.access_token);
         setPath(TODO_PATH);
+        sessionStorage.clear();
         break;
     }
   };
