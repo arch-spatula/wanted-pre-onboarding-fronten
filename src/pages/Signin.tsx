@@ -43,7 +43,12 @@ function Signin() {
         setPasswordErrorMessage(res);
         break;
       default:
-        localStorage.setItem("token", "Bearer " + res?.access_token);
+        localStorage.setItem(
+          "token",
+          JSON.stringify({
+            Authorization: "Bearer " + res?.access_token,
+          })
+        );
         setPath(TODO_PATH);
         sessionStorage.clear();
         break;
