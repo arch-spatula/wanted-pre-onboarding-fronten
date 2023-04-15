@@ -15,6 +15,7 @@ const useSignup = () => {
     email: string;
     password: string;
   }>({ email: "", password: "" });
+
   const [takenEmail, setTakenEmail] = useState<string[]>([]);
 
   const emailRef = useRef<HTMLInputElement>(null);
