@@ -5,6 +5,12 @@ import { TODO_PATH } from "../constants/constants";
 import { useInput } from "../hooks";
 import { checkEmail, checkPassword, isValid, setPath } from "../utils";
 
+/**
+ * 없는 이메일과 틀린 비밀번호를 입력했다고 button을 비활성화 하지 않습니다.
+ * @todo 1. custom hook으로 로직 이동
+ * @todo 2. 에러 메시지에 a태그 JSX를 넣을 수 있도록 추가
+ * @todo 3. Throttling leading edge로 서버 부담 줄이기
+ */
 function Signin() {
   const { email, password } = JSON.parse(
     sessionStorage.getItem("user") ?? '{ "email": "", "password": "" }'
