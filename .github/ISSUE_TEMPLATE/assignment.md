@@ -9,6 +9,6 @@ assignees: arch-spatula
 
 # 과제 제목
 
-(과제 링크)[https://github.com/walking-sunset/selection-task#assignment-번호]
+[과제 링크](https://github.com/walking-sunset/selection-task#assignment-번호)
 
 (과제 설명 목록)
