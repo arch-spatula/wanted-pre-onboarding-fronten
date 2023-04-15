@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { signin } from "../api";
 import { CustomButton, CustomInput } from "../components";
 import { TODO_PATH } from "../constants/constants";
-import { useInput } from "../hooks";
+import { useCheckToken, useInput } from "../hooks";
 import { checkEmail, checkPassword, isValid, setPath } from "../utils";
 
 /**
@@ -12,6 +12,8 @@ import { checkEmail, checkPassword, isValid, setPath } from "../utils";
  * @todo 3. Throttling leading edge로 서버 부담 줄이기
  */
 function Signin() {
+  useCheckToken("토큰 보유 시 Todo로");
+
   const { email, password } = JSON.parse(
     sessionStorage.getItem("user") ?? '{ "email": "", "password": "" }'
   );

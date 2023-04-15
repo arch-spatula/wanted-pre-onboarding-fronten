@@ -8,9 +8,12 @@ import {
   isValid,
   setPath,
 } from "../utils";
+import useCheckToken from "./useCheckToken";
 import useInput from "./useInput";
 
 const useSignup = () => {
+  useCheckToken("토큰 보유 시 Todo로");
+
   const { inputValues, handleInputChange } = useInput<{
     email: string;
     password: string;
