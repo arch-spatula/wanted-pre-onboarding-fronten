@@ -4,16 +4,8 @@ import {
   HEADERS_CONTENT_TYPE_APPLICATION_JSON,
 } from "../constants/constants";
 
-/**
- * @todo 1. authClient, todoClient 분리하고 만들기
- */
-
-const axiosConfig: AxiosRequestConfig = {
-  baseURL,
-};
-
 const axiosAuthConfig: AxiosRequestConfig = {
-  ...axiosConfig,
+  baseURL,
   headers: HEADERS_CONTENT_TYPE_APPLICATION_JSON.headers,
 };
 
@@ -22,10 +14,9 @@ const token: { Authorization?: string } = JSON.parse(
 );
 
 const axiosTodoConfig: AxiosRequestConfig = {
-  ...axiosConfig,
+  baseURL,
   headers: { Authorization: token.Authorization },
 };
 
-export const client = axios.create(axiosConfig);
 export const authClient = axios.create(axiosAuthConfig);
 export const todoClient = axios.create(axiosTodoConfig);
