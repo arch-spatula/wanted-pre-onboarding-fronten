@@ -1,8 +1,8 @@
 import {
-  MAIN_PATH,
-  SIGNIN_PATH,
-  SIGNUP_PATH,
-  TODO_PATH,
+  MAIN_ROUTE,
+  SIGNIN_ROUTE,
+  SIGNUP_ROUTE,
+  TODO_ROUTE,
 } from "../constants/constants";
 import { Main, NotFound, Signin, Signup, Todo } from "../pages";
 
@@ -11,13 +11,13 @@ import { Main, NotFound, Signin, Signup, Todo } from "../pages";
  */
 function Router() {
   switch (window.location.href) {
-    case window.origin + SIGNIN_PATH:
+    case window.origin + SIGNIN_ROUTE:
       return <Signin />;
-    case window.origin + SIGNUP_PATH:
+    case window.origin + SIGNUP_ROUTE:
       return <Signup />;
-    case window.origin + MAIN_PATH:
+    case window.origin + MAIN_ROUTE:
       return <Main />;
-    case window.origin + TODO_PATH:
+    case window.origin + TODO_ROUTE:
       return <Todo />;
     default:
       return <NotFound />;

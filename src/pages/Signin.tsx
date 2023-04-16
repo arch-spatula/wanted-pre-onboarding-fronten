@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { signin } from "../api";
 import { CustomButton, CustomInput } from "../components";
-import { TODO_PATH } from "../constants/constants";
+import { TODO_ROUTE } from "../constants/constants";
 import { useCheckToken, useInput } from "../hooks";
 import { checkEmail, checkPassword, isValid, setPath } from "../utils";
 
@@ -49,7 +49,7 @@ function Signin() {
             Authorization: "Bearer " + res?.access_token,
           })
         );
-        setPath(TODO_PATH);
+        setPath(TODO_ROUTE);
         sessionStorage.clear();
         break;
     }

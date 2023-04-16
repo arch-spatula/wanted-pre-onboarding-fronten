@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { AUTH_PATH, baseURL, SIGNUP_PATH } from "../constants/constants";
+import { baseURL, SIGNUP_ENDPOINT } from "../constants/constants";
 import { server } from "../mocks/server";
 import signup from "./signup";
 
@@ -10,7 +10,7 @@ describe("signup", () => {
 
   test("이미 존재하는 유저", async () => {
     server.use(
-      rest.post(baseURL + AUTH_PATH + SIGNUP_PATH, (req, res, ctx) => {
+      rest.post(baseURL + SIGNUP_ENDPOINT, (req, res, ctx) => {
         return res(ctx.status(400));
       })
     );

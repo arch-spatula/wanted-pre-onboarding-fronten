@@ -1,13 +1,16 @@
 import { AxiosError } from "axios";
-import { TODO_PATH } from "../constants/constants";
+import {
+  HEADERS_CONTENT_TYPE_APPLICATION_JSON,
+  TODO_ENDPOINT,
+} from "../constants/constants";
 import { todoClient } from "./todoClient";
 
 async function createTodo(todo: string) {
   try {
     const res = await todoClient.post(
-      TODO_PATH + "s",
+      TODO_ENDPOINT,
       { todo },
-      { headers: { "Content-Type": "application/json" } }
+      HEADERS_CONTENT_TYPE_APPLICATION_JSON
     );
     return res.data;
   } catch (error) {

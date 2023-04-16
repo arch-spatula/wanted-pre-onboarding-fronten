@@ -1,14 +1,32 @@
 /** 서버 origin */
 const baseURL = "https://www.pre-onboarding-selection-task.shop";
 
-const SIGNIN_PATH = "/signin";
+const SIGNIN_ROUTE = "/signin";
 
-const SIGNUP_PATH = "/signup";
+const SIGNIN_ENDPOINT = `/auth${SIGNIN_ROUTE}`;
 
-const MAIN_PATH = "/";
+const SIGNUP_ROUTE = "/signup";
 
-const TODO_PATH = "/todo";
+const SIGNUP_ENDPOINT = `/auth${SIGNUP_ROUTE}`;
 
-const AUTH_PATH = "/auth";
+const MAIN_ROUTE = "/";
 
-export { baseURL, MAIN_PATH, SIGNUP_PATH, SIGNIN_PATH, TODO_PATH, AUTH_PATH };
+const TODO_ROUTE = "/todo";
+
+const TODO_ENDPOINT = "/todos";
+
+const HEADERS_CONTENT_TYPE_APPLICATION_JSON = {
+  headers: { "Content-Type": "application/json" },
+} as const;
+
+export {
+  baseURL,
+  MAIN_ROUTE,
+  SIGNUP_ROUTE,
+  SIGNUP_ENDPOINT,
+  SIGNIN_ROUTE,
+  SIGNIN_ENDPOINT,
+  TODO_ROUTE,
+  TODO_ENDPOINT,
+  HEADERS_CONTENT_TYPE_APPLICATION_JSON,
+};

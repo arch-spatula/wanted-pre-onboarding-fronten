@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { baseURL, TODO_PATH } from "../constants/constants";
+import { baseURL, TODO_ENDPOINT } from "../constants/constants";
 import { server } from "../mocks/server";
 import createTodo from "./createTodo";
 
@@ -16,7 +16,7 @@ describe("createTodo", () => {
   });
   test("비어있는 todo 생성 요청", async () => {
     server.use(
-      rest.post(baseURL + TODO_PATH + "s", (req, res, ctx) =>
+      rest.post(baseURL + TODO_ENDPOINT, (req, res, ctx) =>
         res(ctx.status(400))
       )
     );

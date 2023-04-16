@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { SIGNIN_PATH, TODO_PATH } from "../constants/constants";
+import { SIGNIN_ROUTE, TODO_ROUTE } from "../constants/constants";
 import { setPath } from "../utils";
 
 /**
@@ -17,10 +17,10 @@ function useCheckToken(
 
     switch (true) {
       case isToken === "토큰 보유 시 Todo로" && token.Authorization:
-        setPath(TODO_PATH, "replace");
+        setPath(TODO_ROUTE, "replace");
         break;
       case isToken === "토큰 없을 시 Signin으로" && !token.Authorization:
-        setPath(SIGNIN_PATH, "replace");
+        setPath(SIGNIN_ROUTE, "replace");
         break;
       default:
         break;

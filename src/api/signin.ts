@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { AUTH_PATH, SIGNIN_PATH } from "../constants/constants";
+import { SIGNIN_ENDPOINT } from "../constants/constants";
 import { client } from "./client";
 
 /**
@@ -10,7 +10,7 @@ import { client } from "./client";
 async function signin(email: string, password: string) {
   try {
     const res: AxiosResponse<{ access_token: string }> = await client.post(
-      AUTH_PATH + SIGNIN_PATH,
+      SIGNIN_ENDPOINT,
       { email, password },
       { headers: { "Content-Type": "application/json" } }
     );
