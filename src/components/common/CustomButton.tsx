@@ -13,6 +13,7 @@ interface CustomButtonProps {
 /**
  * @param {CustomButtonProps} Props href가 있으면 onClick을 사용하지 않습니다. onClick이 있으면 href를 사용하지 않습니다.
  * @returns {HTMLAnchorElement | HTMLButtonElement}
+ * @example
  * <CustomButton text={buttonText} hierarchy="primary" onClick={() => {}} />
  * <CustomButton text={buttonText} hierarchy="secondary" href="/" />
  * @see https://www.builder.io/blog/buttons
