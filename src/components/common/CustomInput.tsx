@@ -5,7 +5,7 @@ interface CustomInputProps {
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   placeholder?: string;
   errorMessage?: string;
-  type?: HTMLInputTypeAttribute;
+  customType?: HTMLInputTypeAttribute;
   inputLabel?: {
     label: string;
     id: string;
@@ -28,7 +28,7 @@ interface CustomInputProps {
 function CustomInput({
   value,
   onChange,
-  type = "text",
+  customType = "text",
   customRef,
   placeholder,
   errorMessage,
@@ -44,7 +44,7 @@ function CustomInput({
       )}
       <input
         className="w-64 rounded-lg border border-gray-300 px-3 py-2 focus:border-green-500 focus:outline-none"
-        type={type}
+        type={customType}
         value={value}
         placeholder={placeholder}
         onChange={onChange}
