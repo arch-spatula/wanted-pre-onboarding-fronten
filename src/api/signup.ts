@@ -1,13 +1,9 @@
 import { SIGNUP_ENDPOINT } from "../constants/constants";
-import { client } from "./client";
+import { authClient } from "./client";
 
 async function signup(email: string, password: string) {
   try {
-    const res = await client.post(
-      SIGNUP_ENDPOINT,
-      { email, password },
-      { headers: { "Content-Type": "application/json" } }
-    );
+    const res = await authClient.post(SIGNUP_ENDPOINT, { email, password });
     if (res.status === 201) {
       return "";
     }

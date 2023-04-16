@@ -3,7 +3,7 @@ import {
   HEADERS_CONTENT_TYPE_APPLICATION_JSON,
   TODO_ENDPOINT,
 } from "../constants/constants";
-import { todoClient } from "./todoClient";
+import { todoClient } from "./client";
 
 async function createTodo(todo: string) {
   try {
