@@ -1,4 +1,5 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import { createTodo } from "../api";
 import { CustomButton, CustomInput } from "../components";
 import { useCheckToken, useInput } from "../hooks";
 
@@ -18,7 +19,8 @@ function Todo() {
 
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const handleCreateTodo = () => {
+  const handleCreateTodo = async () => {
+    await createTodo(inputValues.todoInput);
     setTodos((prev) => [
       ...prev,
       { todo: inputValues.todoInput, isCompleted: false },
@@ -48,7 +50,7 @@ function Todo() {
           return (
             <li key={idx}>
               <p>{todo.todo}</p>
-              <input type="checkbox" checked={todo.isCompleted} />
+              {/* <input type="checkbox" checked={todo.isCompleted} /> */}
             </li>
           );
         })}
