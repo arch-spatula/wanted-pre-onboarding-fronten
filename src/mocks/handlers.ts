@@ -40,14 +40,38 @@ export const handlers = [
   }),
 
   rest.get(baseURL + TODO_ENDPOINT, (req, res, ctx) => {
-    // return res(ctx.status(200));
+    return res(
+      ctx.status(200),
+      ctx.json([
+        {
+          id: 1,
+          todo: "todo2",
+          isCompleted: false,
+          userId: 1,
+        },
+        {
+          id: 2,
+          todo: "todo3",
+          isCompleted: false,
+          userId: 1,
+        },
+      ])
+    );
   }),
 
   rest.put(baseURL + TODO_ENDPOINT + "/1", (req, res, ctx) => {
-    // return res(ctx.status(200));
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: 1,
+        todo: "Hello World",
+        isCompleted: true,
+        userId: 2,
+      })
+    );
   }),
 
   rest.delete(baseURL + TODO_ENDPOINT + "/1", (req, res, ctx) => {
-    // return res(ctx.status(204));
+    return res(ctx.status(204), ctx.body(""));
   }),
 ];
