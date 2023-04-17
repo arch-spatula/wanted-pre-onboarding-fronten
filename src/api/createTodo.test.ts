@@ -14,6 +14,7 @@ describe("createTodo", () => {
     };
     expect(await createTodo(task)).toEqual(todo);
   });
+
   test("비어있는 todo 생성 요청", async () => {
     server.use(
       rest.post(baseURL + TODO_ENDPOINT, (req, res, ctx) =>
@@ -23,7 +24,7 @@ describe("createTodo", () => {
 
     const emptyTask = "";
     expect(await createTodo(emptyTask)).toEqual(
-      "비어있는 todo 생성을 요청할 수 없습니다."
+      "비어있는 todo로 생성 요청할 수 없습니다."
     );
   });
 });
