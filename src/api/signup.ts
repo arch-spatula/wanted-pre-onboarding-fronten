@@ -3,7 +3,8 @@ import { authClient } from "./client";
 
 async function signup(email: string, password: string) {
   try {
-    const res = await authClient.post(SIGNUP_ENDPOINT, { email, password });
+    const client = authClient();
+    const res = await client.post(SIGNUP_ENDPOINT, { email, password });
     if (res.status === 201) {
       return "";
     }

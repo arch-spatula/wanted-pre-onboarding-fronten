@@ -9,7 +9,8 @@ import { authClient } from "./client";
  */
 async function signin(email: string, password: string) {
   try {
-    const res: AxiosResponse<{ access_token: string }> = await authClient.post(
+    const client = authClient();
+    const res: AxiosResponse<{ access_token: string }> = await client.post(
       SIGNIN_ENDPOINT,
       { email, password }
     );

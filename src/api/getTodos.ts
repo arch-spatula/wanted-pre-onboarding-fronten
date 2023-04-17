@@ -2,9 +2,14 @@ import { AxiosError } from "axios";
 import { TODO_ENDPOINT } from "../constants/constants";
 import { todoClient } from "./client";
 
+/**
+ * @example
+ * getTodos();
+ */
 async function getTodos() {
   try {
-    const res = await todoClient.get(TODO_ENDPOINT);
+    const client = todoClient();
+    const res = await client.get(TODO_ENDPOINT);
     return res.data;
   } catch (error) {
     const err = error as AxiosError;
