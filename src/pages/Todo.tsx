@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createTodo, getTodos } from "../api";
-import { CustomButton, CustomInput } from "../components";
-import { useCheckToken, useInput } from "../hooks";
+import { CustomButton, CustomInput, TodoList } from "../components";
+import { useCheckToken, useInput, useTodos } from "../hooks";
 
 /**
  * @todo 1. throttle 걸어두기
@@ -17,25 +17,7 @@ function Todo() {
     todoInput: "",
   });
 
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  const handleCreateTodo = async () => {
-    await createTodo(inputValues.todoInput);
-    setTodos((prev) => [
-      ...prev,
-      { todo: inputValues.todoInput, isCompleted: false },
-    ]);
-
-    resetSpecificInput("todoInput");
-  };
-
-  useEffect(() => {
-    const syncTodos = async () => {
-      const todos = await getTodos();
-      setTodos(todos);
-    };
-    syncTodos();
-  }, []);
+  const { handleCreateTodo } = useTodos();
 
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
@@ -49,20 +31,14 @@ function Todo() {
         <CustomButton
           text="추가"
           hierarchy="primary"
-          onClick={() => handleCreateTodo()}
+          onClick={() => {
+            handleCreateTodo(inputValues.todoInput);
+            resetSpecificInput("todoInput");
+          }}
           testId="new-todo-add-button"
         />
       </form>
-      <ul>
-        {todos.map((todo, idx) => {
-          return (
-            <li key={idx}>
-              <p>{todo.todo}</p>
-              {/* <input type="checkbox" checked={todo.isCompleted} /> */}
-            </li>
-          );
-        })}
-      </ul>
+      <TodoList />
     </main>
   );
 }
