@@ -10,13 +10,12 @@ import { todoClient } from "./client";
  * updateTodo(1, { todo: "foo", isCompleted: true });
  */
 async function updateTodo(id: number, todo: Omit<Todo, "id" | "userId">) {
-  const { headers } = HEADERS_CONTENT_TYPE_APPLICATION_JSON;
   try {
     const client = todoClient();
     const res = await client.put(
       TODO_ENDPOINT + `/${id}`,
       { todo },
-      { headers }
+      HEADERS_CONTENT_TYPE_APPLICATION_JSON
     );
     if (res.status === 200) return res.data;
   } catch (error) {
