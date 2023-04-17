@@ -23,7 +23,7 @@ function Signup() {
           inputLabel={{ label: "email", id: "email" }}
           errorMessage={validEmail}
           testId="email-input"
-          type="email"
+          customType="email"
           customRef={emailRef}
         />
         <CustomInput
@@ -33,7 +33,7 @@ function Signup() {
           inputLabel={{ label: "password", id: "password" }}
           errorMessage={validPassword}
           testId="password-input"
-          type="password"
+          customType="password"
         />
         <CustomButton
           text="회원가입"

@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { AUTH_PATH, baseURL, SIGNIN_PATH } from "../constants/constants";
+import { baseURL, SIGNIN_ENDPOINT } from "../constants/constants";
 import { server } from "../mocks/server";
 import signin from "./signin";
 
@@ -13,7 +13,7 @@ describe("signin", () => {
 
   test("비밀번호 불일치", async () => {
     server.use(
-      rest.post(baseURL + AUTH_PATH + SIGNIN_PATH, (req, res, ctx) =>
+      rest.post(baseURL + SIGNIN_ENDPOINT, (req, res, ctx) =>
         res(ctx.status(401))
       )
     );
@@ -25,7 +25,7 @@ describe("signin", () => {
 
   test("없는 회원", async () => {
     server.use(
-      rest.post(baseURL + AUTH_PATH + SIGNIN_PATH, (req, res, ctx) =>
+      rest.post(baseURL + SIGNIN_ENDPOINT, (req, res, ctx) =>
         res(ctx.status(404))
       )
     );

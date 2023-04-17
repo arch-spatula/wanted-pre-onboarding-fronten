@@ -1,13 +1,10 @@
-import { AUTH_PATH, SIGNUP_PATH } from "../constants/constants";
-import { client } from "./client";
+import { SIGNUP_ENDPOINT } from "../constants/constants";
+import { authClient } from "./client";
 
 async function signup(email: string, password: string) {
   try {
-    const res = await client.post(
-      AUTH_PATH + SIGNUP_PATH,
-      { email, password },
-      { headers: { "Content-Type": "application/json" } }
-    );
+    const client = authClient();
+    const res = await client.post(SIGNUP_ENDPOINT, { email, password });
     if (res.status === 201) {
       return "";
     }

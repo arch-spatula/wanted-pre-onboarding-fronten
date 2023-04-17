@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import signup from "../api/signup";
-import { SIGNIN_PATH } from "../constants/constants";
+import { SIGNIN_ROUTE } from "../constants/constants";
 import {
   checkEmail,
   checkPassword,
@@ -33,7 +33,7 @@ const useSignup = () => {
           password,
         })
       );
-      setPath(SIGNIN_PATH);
+      setPath(SIGNIN_ROUTE);
     } else if (res === "동일한 이메일이 이미 존재합니다.") {
       emailRef.current?.focus();
       setTakenEmail((prev) => [...prev, email]);

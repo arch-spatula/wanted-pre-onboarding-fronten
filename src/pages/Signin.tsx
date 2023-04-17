@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { signin } from "../api";
 import { CustomButton, CustomInput } from "../components";
-import { TODO_PATH } from "../constants/constants";
+import { TODO_ROUTE } from "../constants/constants";
 import { useCheckToken, useInput } from "../hooks";
 import { checkEmail, checkPassword, isValid, setPath } from "../utils";
 
@@ -49,7 +49,7 @@ function Signin() {
             Authorization: "Bearer " + res?.access_token,
           })
         );
-        setPath(TODO_PATH);
+        setPath(TODO_ROUTE);
         sessionStorage.clear();
         break;
     }
@@ -71,7 +71,7 @@ function Signin() {
           errorMessage={validEmail || emailErrorMessage}
           customRef={emailRef}
           testId="email-input"
-          type="email"
+          customType="email"
         />
         <CustomInput
           value={inputValues.password}
@@ -81,7 +81,7 @@ function Signin() {
           errorMessage={validPassword || passwordErrorMessage}
           customRef={passwordRef}
           testId="password-input"
-          type="password"
+          customType="password"
         />
         <CustomButton
           text="로그인"
