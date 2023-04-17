@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { createTodo } from "../api";
+import { useEffect, useState } from "react";
+import { createTodo, getTodos } from "../api";
 import { CustomButton, CustomInput } from "../components";
 import { useCheckToken, useInput } from "../hooks";
 
@@ -28,6 +28,14 @@ function Todo() {
 
     resetSpecificInput("todoInput");
   };
+
+  useEffect(() => {
+    const syncTodos = async () => {
+      const todos = await getTodos();
+      setTodos(todos);
+    };
+    syncTodos();
+  }, []);
 
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
