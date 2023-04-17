@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { createTodo, getTodos } from "../api";
 import { CustomButton, CustomInput, TodoList } from "../components";
 import { useCheckToken, useInput, useTodos } from "../hooks";
 
@@ -36,6 +34,7 @@ function Todo() {
             resetSpecificInput("todoInput");
           }}
           testId="new-todo-add-button"
+          disabled={!inputValues.todoInput}
         />
       </form>
       <TodoList />
