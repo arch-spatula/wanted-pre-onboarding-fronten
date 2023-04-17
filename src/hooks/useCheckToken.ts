@@ -16,11 +16,11 @@ function useCheckToken(
     );
 
     switch (true) {
-      case isToken === "토큰 보유 시 Todo로" && token.Authorization:
-        setPath(TODO_ROUTE, "replace");
+      case token.Authorization && isToken === "토큰 보유 시 Todo로":
+        setPath(TODO_ROUTE);
         break;
-      case isToken === "토큰 없을 시 Signin으로" && !token.Authorization:
-        setPath(SIGNIN_ROUTE, "replace");
+      case !token.Authorization && isToken === "토큰 없을 시 Signin으로":
+        setPath(SIGNIN_ROUTE);
         break;
       default:
         break;
