@@ -4,18 +4,20 @@ import {
   HEADERS_CONTENT_TYPE_APPLICATION_JSON,
 } from "../constants/constants";
 
+const { headers } = HEADERS_CONTENT_TYPE_APPLICATION_JSON;
 const axiosAuthConfig: AxiosRequestConfig = {
   baseURL,
-  headers: HEADERS_CONTENT_TYPE_APPLICATION_JSON.headers,
+  headers,
 };
 
-const token: { Authorization?: string } = JSON.parse(
-  localStorage.getItem("token") ?? "{}"
+const token: { Authorization: string } = JSON.parse(
+  localStorage.getItem("token") ?? "{ 'Authorization': '' }"
 );
 
+const { Authorization } = token;
 const axiosTodoConfig: AxiosRequestConfig = {
   baseURL,
-  headers: { Authorization: token.Authorization },
+  headers: { Authorization },
 };
 
 export const authClient = axios.create(axiosAuthConfig);
