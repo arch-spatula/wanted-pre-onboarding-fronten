@@ -17,7 +17,7 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
 
   const handleCheck = () => {
     setChecked((prev) => !prev);
-    handleUpdateTodo(id, { todo, isCompleted: checked });
+    handleUpdateTodo(id, { todo, isCompleted: !checked });
   };
 
   const handleStartEditTodo = () => {
