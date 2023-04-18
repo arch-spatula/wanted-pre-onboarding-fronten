@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMLInputTypeAttribute, RefObject } from "react";
+import { ChangeEvent, HTMLInputTypeAttribute, RefObject, useId } from "react";
 
 interface CustomInputProps {
   value: string;
@@ -6,16 +6,14 @@ interface CustomInputProps {
   placeholder?: string;
   errorMessage?: string;
   customType?: HTMLInputTypeAttribute;
-  inputLabel?: {
-    label: string;
-    id: string;
-  };
+  inputLabel?: string;
   testId?: string;
   customRef?:
     | ((instance: HTMLInputElement | null) => void)
     | RefObject<HTMLInputElement>
     | null
     | undefined;
+  feedback?: boolean;
 }
 
 /**
@@ -34,12 +32,14 @@ function CustomInput({
   errorMessage,
   inputLabel,
   testId,
+  feedback = true,
 }: CustomInputProps) {
+  const id = useId();
   return (
-    <div className="flex h-28 flex-col">
-      {inputLabel?.id && (
-        <label htmlFor={inputLabel?.id}>
-          <h3 className="pb-2 text-xl">{inputLabel?.label}</h3>
+    <div className={feedback ? "flex h-28 flex-col" : "flex h-10 flex-col"}>
+      {inputLabel && (
+        <label htmlFor={id}>
+          <h3 className="pb-2 text-xl">{inputLabel}</h3>
         </label>
       )}
       <input
@@ -49,11 +49,11 @@ function CustomInput({
         placeholder={placeholder}
         onChange={onChange}
         ref={customRef}
-        {...(typeof inputLabel?.id === "string" && { id: inputLabel?.id })}
+        {...(typeof inputLabel === "string" && { id })}
         {...(testId && { "data-testid": testId })}
       />
-      {errorMessage && (
-        <span className=" pt-1 text-red-500">{errorMessage}</span>
+      {errorMessage && feedback && (
+        <span className=" truncate pt-1 text-red-500">{errorMessage}</span>
       )}
     </div>
   );
