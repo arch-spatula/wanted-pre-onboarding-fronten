@@ -1,16 +1,10 @@
-import { memo, useEffect, useId, useState } from "react";
+import { memo, useId, useState } from "react";
 import { useInput, useTodos } from "../hooks";
 import CustomButton from "./common/CustomButton";
 import CustomCheckBox from "./common/CustomCheckBox";
 import CustomInput from "./common/CustomInput";
 
 function TodoItem({ id, todo, isCompleted }: Todo) {
-  const [checked, setChecked] = useState(isCompleted);
-  useEffect(() => {
-    setChecked(isCompleted);
-  }, [isCompleted]);
-  console.log(id, todo);
-
   const [isEdit, setIsEdit] = useState(false);
   const { inputValues, handleInputChange, resetSpecificInput } = useInput<{
     editInput: string;
@@ -21,8 +15,7 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
   const { handleDeleteTodo, handleUpdateTodo } = useTodos();
 
   const handleCheck = () => {
-    setChecked((prev) => !prev);
-    handleUpdateTodo(id, { todo, isCompleted: !checked });
+    handleUpdateTodo(id, { todo, isCompleted: !isCompleted });
   };
 
   const handleStartEditTodo = () => {
@@ -31,7 +24,10 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
 
   const handleDoneEditTodo = () => {
     setIsEdit(false);
-    handleUpdateTodo(id, { todo: inputValues.editInput, isCompleted: checked });
+    handleUpdateTodo(id, {
+      todo: inputValues.editInput,
+      isCompleted: isCompleted,
+    });
   };
 
   const handleCancelEditTodo = () => {
@@ -40,11 +36,11 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
   };
 
   return (
-    <li className="flex h-10 justify-start gap-4">
+    <li className="flex h-10 justify-start gap-4" key={id}>
       <label htmlFor={markupId} className="flex items-center gap-2">
         <CustomCheckBox
           id={markupId}
-          checked={checked}
+          checked={isCompleted}
           onChange={handleCheck}
         />
         {isEdit ? (
