@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   HTMLInputTypeAttribute,
+  ReactNode,
   RefObject,
   useEffect,
   useId,
@@ -11,7 +12,7 @@ interface CustomInputProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   placeholder?: string;
-  errorMessage?: string;
+  errorMessage?: string | ReactNode;
   customType?: HTMLInputTypeAttribute;
   inputLabel?: string;
   testId?: string;
