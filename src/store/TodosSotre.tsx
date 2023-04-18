@@ -4,6 +4,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { createTodo, deleteTodo, getTodos, updateTodo } from "../api";
@@ -24,20 +25,16 @@ function useTodosSource() {
   }, []);
 
   const handleCreateTodo = useCallback(async (todo: string) => {
-    const arr = new Uint32Array(6);
-    const id = parseInt(crypto.getRandomValues(arr).join(""));
-    setTodos((prev) => [...prev, { id, todo, isCompleted: false }]);
-    await createTodo(todo);
+    const { id, userId } = await createTodo(todo);
+    setTodos((prev) => [...prev, { id, todo, isCompleted: false, userId }]);
   }, []);
 
   const handleUpdateTodo = useCallback(
     async (id: number, { todo, isCompleted }: Omit<Todo, "id" | "userId">) => {
       setTodos((prev) =>
-        [...prev].map((todoItem) => {
-          return todoItem.id === id
-            ? { ...todoItem, todo, isCompleted }
-            : todoItem;
-        })
+        [...prev].map((todoItem) =>
+          todoItem.id === id ? { ...todoItem, todo, isCompleted } : todoItem
+        )
       );
       await updateTodo(id, { todo, isCompleted });
     },
@@ -49,12 +46,17 @@ function useTodosSource() {
     await deleteTodo(id);
   }, []);
 
-  return {
-    todos,
-    handleCreateTodo,
-    handleUpdateTodo,
-    handleDeleteTodo,
-  };
+  const contextValue = useMemo(
+    () => ({
+      todos,
+      handleCreateTodo,
+      handleUpdateTodo,
+      handleDeleteTodo,
+    }),
+    [todos, handleCreateTodo, handleUpdateTodo, handleDeleteTodo]
+  );
+
+  return contextValue;
 }
 
 const todoCTX = createContext<ReturnType<typeof useTodosSource>>(
