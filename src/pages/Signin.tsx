@@ -62,7 +62,7 @@ function Signin() {
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
       <h1 className="text-3xl">로그인</h1>
-      <div className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4">
         <CustomInput
           value={inputValues.email}
           placeholder="user@user.com"
@@ -90,7 +90,7 @@ function Signin() {
           disabled={disabled}
           onClick={handleSignin}
         />
-      </div>
+      </form>
     </main>
   );
 }

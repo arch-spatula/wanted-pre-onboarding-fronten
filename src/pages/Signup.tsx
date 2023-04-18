@@ -15,7 +15,7 @@ function Signup() {
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4">
       <h1 className="pb-2 text-3xl">회원가입</h1>
-      <div className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4">
         <CustomInput
           value={inputValues.email}
           placeholder="user@user.com"
@@ -42,7 +42,7 @@ function Signup() {
           disabled={disabled}
           onClick={() => handleSignUp(inputValues.email, inputValues.password)}
         />
-      </div>
+      </form>
     </main>
   );
 }
