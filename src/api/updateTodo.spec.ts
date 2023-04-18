@@ -4,7 +4,7 @@ import { server } from "../mocks/server";
 import updateTodo from "./updateTodo";
 
 describe("updateTodo", () => {
-  test("todo 갱신 요청 성공", async () => {
+  it("todo 갱신 요청 성공", async () => {
     expect(
       await updateTodo(1, {
         todo: "Hello World",
@@ -18,7 +18,7 @@ describe("updateTodo", () => {
     });
   });
 
-  test("토큰 없이 todo 갱신 요청", async () => {
+  it("토큰 없이 todo 갱신 요청", async () => {
     server.use(
       rest.put(baseURL + TODO_ENDPOINT + "/1", (req, res, ctx) =>
         res(ctx.status(401))
@@ -33,7 +33,7 @@ describe("updateTodo", () => {
     ).toBe("토큰이 없습니다.");
   });
 
-  test("접근할 수 없는 todo id에 갱신요청", async () => {
+  it("접근할 수 없는 todo id에 갱신요청", async () => {
     server.use(
       rest.put(baseURL + TODO_ENDPOINT + "/1", (req, res, ctx) =>
         res(ctx.status(400))
