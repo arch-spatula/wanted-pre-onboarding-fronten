@@ -53,7 +53,9 @@ function CustomInput({
         {...(testId && { "data-testid": testId })}
       />
       {errorMessage && feedback && (
-        <span className=" truncate pt-1 text-red-500">{errorMessage}</span>
+        <span role="caption" className=" truncate pt-1 text-red-500">
+          {errorMessage}
+        </span>
       )}
     </div>
   );
