@@ -43,7 +43,6 @@ function reducer(state: Todo[], action: TodoAction) {
 
 /**
  * @todo 1. 불필요한 리랜더링 이슈 해결
- * @todo 4. reducer로 리팩토링하기
  */
 function useTodosSource() {
   const [todos, dispatch] = useReducer(reducer, []);
