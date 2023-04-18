@@ -1,4 +1,4 @@
-import { memo, useId, useState } from "react";
+import { memo, useEffect, useId, useState } from "react";
 import { useInput, useTodos } from "../hooks";
 import CustomButton from "./common/CustomButton";
 import CustomCheckBox from "./common/CustomCheckBox";
@@ -6,6 +6,10 @@ import CustomInput from "./common/CustomInput";
 
 function TodoItem({ id, todo, isCompleted }: Todo) {
   const [checked, setChecked] = useState(isCompleted);
+  useEffect(() => {
+    setChecked(isCompleted);
+  }, [isCompleted]);
+
   const [isEdit, setIsEdit] = useState(false);
   const { inputValues, handleInputChange, resetSpecificInput } = useInput<{
     editInput: string;
