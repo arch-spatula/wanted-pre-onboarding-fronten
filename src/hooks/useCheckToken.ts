@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { SIGNIN_ROUTE, TODO_ROUTE } from "../constants/constants";
-import { setPath } from "../utils";
+import { checkStorage, setPath } from "../utils";
 
 /**
  * @param {"토큰 보유 시 Todo로" | "토큰 없을 시 Signin으로"} isToken 토큰의 보유여부에 따라 리다이렉팅 결정
@@ -11,9 +11,7 @@ function useCheckToken(
   isToken: "토큰 보유 시 Todo로" | "토큰 없을 시 Signin으로"
 ) {
   useEffect(() => {
-    const token: { Authorization?: string } = JSON.parse(
-      localStorage.getItem("token") ?? "{}"
-    );
+    const token = checkStorage();
 
     switch (true) {
       case token.Authorization && isToken === "토큰 보유 시 Todo로":

@@ -3,6 +3,7 @@ import {
   baseURL,
   HEADERS_CONTENT_TYPE_APPLICATION_JSON,
 } from "../constants/constants";
+import { checkStorage } from "../utils";
 
 export function authClient() {
   const { headers } = HEADERS_CONTENT_TYPE_APPLICATION_JSON;
@@ -15,11 +16,7 @@ export function authClient() {
 }
 
 export function todoClient() {
-  const token: { Authorization?: string } = JSON.parse(
-    localStorage.getItem("token") ?? "{}"
-  );
-
-  const { Authorization } = token;
+  const { Authorization } = checkStorage();
   const axiosTodoConfig: AxiosRequestConfig = {
     baseURL,
     headers: { Authorization },

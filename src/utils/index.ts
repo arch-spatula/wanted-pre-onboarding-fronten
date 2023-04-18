@@ -4,6 +4,7 @@ import checkTakenEmail from "./checkTakenEmail";
 import isValid from "./isValid";
 import getPath from "./getPath";
 import setPath from "./setPath";
+import checkStorage from "./checkStorage";
 
 export {
   checkEmail,
@@ -12,4 +13,5 @@ export {
   setPath,
   getPath,
   checkTakenEmail,
+  checkStorage,
 };
