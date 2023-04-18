@@ -12,7 +12,6 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
   }>({
     editInput: todo,
   });
-
   const markupId = useId();
   const { handleDeleteTodo, handleUpdateTodo } = useTodos();
 
@@ -49,6 +48,7 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
             onChange={handleInputChange("editInput")}
             testId="modify-input"
             feedback={false}
+            focusOnMount={true}
           />
         ) : (
           <span className="w-64 truncate">{todo}</span>
@@ -61,6 +61,7 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
             hierarchy="primary"
             testId="modify-button"
             onClick={handleDoneEditTodo}
+            disabled={!inputValues.editInput}
           />
           <CustomButton
             text="취소"

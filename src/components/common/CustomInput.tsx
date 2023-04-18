@@ -1,4 +1,11 @@
-import { ChangeEvent, HTMLInputTypeAttribute, RefObject, useId } from "react";
+import {
+  ChangeEvent,
+  HTMLInputTypeAttribute,
+  RefObject,
+  useEffect,
+  useId,
+  useRef,
+} from "react";
 
 interface CustomInputProps {
   value: string;
@@ -14,6 +21,7 @@ interface CustomInputProps {
     | null
     | undefined;
   feedback?: boolean;
+  focusOnMount?: boolean;
 }
 
 /**
@@ -33,8 +41,16 @@ function CustomInput({
   inputLabel,
   testId,
   feedback = true,
+  focusOnMount,
 }: CustomInputProps) {
   const id = useId();
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (focusOnMount) {
+      inputRef.current?.focus();
+    }
+  }, []);
+
   return (
     <div className={feedback ? "flex h-28 flex-col" : "flex h-10 flex-col"}>
       {inputLabel && (
@@ -48,7 +64,7 @@ function CustomInput({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        ref={customRef}
+        ref={customRef ?? inputRef}
         {...(typeof inputLabel === "string" && { id })}
         {...(testId && { "data-testid": testId })}
       />
