@@ -1,6 +1,5 @@
 import { CustomButton, CustomInput, TodoList } from "../components";
 import { useCheckToken, useInput, useTodos } from "../hooks";
-import TodosProvider from "../store/TodosSotre";
 
 /**
  * @todo 1. throttle 걸어두기
@@ -19,29 +18,27 @@ function Todo() {
   const { handleCreateTodo } = useTodos();
 
   return (
-    <TodosProvider>
-      <main className="flex h-screen flex-col items-center justify-center gap-4">
-        <form className="flex h-10 flex-row gap-4">
-          <CustomInput
-            value={inputValues.todoInput}
-            placeholder="오늘 배운 일 블로깅하기"
-            onChange={handleInputChange("todoInput")}
-            testId="new-todo-input"
-          />
-          <CustomButton
-            text="추가"
-            hierarchy="primary"
-            onClick={() => {
-              handleCreateTodo(inputValues.todoInput);
-              resetSpecificInput("todoInput");
-            }}
-            testId="new-todo-add-button"
-            disabled={!inputValues.todoInput}
-          />
-        </form>
-        <TodoList />
-      </main>
-    </TodosProvider>
+    <main className="flex h-screen flex-col items-center justify-center gap-4">
+      <form className="flex h-10 flex-row gap-4">
+        <CustomInput
+          value={inputValues.todoInput}
+          placeholder="오늘 배운 일 블로깅하기"
+          onChange={handleInputChange("todoInput")}
+          testId="new-todo-input"
+        />
+        <CustomButton
+          text="추가"
+          hierarchy="primary"
+          onClick={() => {
+            handleCreateTodo(inputValues.todoInput);
+            resetSpecificInput("todoInput");
+          }}
+          testId="new-todo-add-button"
+          disabled={!inputValues.todoInput}
+        />
+      </form>
+      <TodoList />
+    </main>
   );
 }
 
