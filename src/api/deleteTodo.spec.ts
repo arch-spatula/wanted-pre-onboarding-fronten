@@ -4,10 +4,11 @@ import { server } from "../mocks/server";
 import deleteTodo from "./deleteTodo";
 
 describe("deleteTodo", () => {
-  test("todos 삭제 요청 성공", async () => {
+  it("todos 삭제 요청 성공", async () => {
     expect(await deleteTodo(1)).toBe("삭제 성공");
   });
-  test("접근할 수 없는 id로 삭제 요청", async () => {
+
+  it("접근할 수 없는 id로 삭제 요청", async () => {
     server.use(
       rest.delete(baseURL + TODO_ENDPOINT + "/1", (req, res, ctx) =>
         res(ctx.status(400))
@@ -18,7 +19,8 @@ describe("deleteTodo", () => {
       "비어있거나 잘못된 id로 삭제 요청할 수 없습니다."
     );
   });
-  test("토큰 없이 삭제 요청", async () => {
+
+  it("토큰 없이 삭제 요청", async () => {
     server.use(
       rest.delete(baseURL + TODO_ENDPOINT + "/1", (req, res, ctx) =>
         res(ctx.status(401))

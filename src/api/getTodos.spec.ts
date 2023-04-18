@@ -4,7 +4,7 @@ import { server } from "../mocks/server";
 import getTodos from "./getTodos";
 
 describe("getTodos", () => {
-  test("본인 todo get 요청 성공", async () => {
+  it("본인 todo get 요청 성공", async () => {
     expect(await getTodos()).toEqual([
       {
         id: 1,
@@ -21,7 +21,7 @@ describe("getTodos", () => {
     ]);
   });
 
-  test("token이 없을 때 요청", async () => {
+  it("token이 없을 때 요청", async () => {
     server.use(
       rest.get(baseURL + TODO_ENDPOINT, (req, res, ctx) => res(ctx.status(401)))
     );

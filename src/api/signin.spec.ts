@@ -4,14 +4,14 @@ import { server } from "../mocks/server";
 import signin from "./signin";
 
 describe("signin", () => {
-  test("로그인 성공", async () => {
+  it("로그인 성공", async () => {
     expect(await signin("testuser@user.com", "12345678")).toEqual({
       access_token:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwic3ViIjo0LCJpYXQiOjE2NTk5MDQyMTUsImV4cCI6MTY2MDUwOTAxNX0.DyUCCsIGxIl8i_sGFCa3uQcyEDb9dChjbl40h3JWJNc",
     });
   });
 
-  test("비밀번호 불일치", async () => {
+  it("비밀번호 불일치", async () => {
     server.use(
       rest.post(baseURL + SIGNIN_ENDPOINT, (req, res, ctx) =>
         res(ctx.status(401))
@@ -23,7 +23,7 @@ describe("signin", () => {
     );
   });
 
-  test("없는 회원", async () => {
+  it("없는 회원", async () => {
     server.use(
       rest.post(baseURL + SIGNIN_ENDPOINT, (req, res, ctx) =>
         res(ctx.status(404))

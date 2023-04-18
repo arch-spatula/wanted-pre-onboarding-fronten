@@ -4,7 +4,7 @@ import { server } from "../mocks/server";
 import createTodo from "./createTodo";
 
 describe("createTodo", () => {
-  test("todo 생성 요청 성공", async () => {
+  it("todo 생성 요청 성공", async () => {
     const task = "과제하기";
     const todo: Todo = {
       id: 1,
@@ -15,7 +15,7 @@ describe("createTodo", () => {
     expect(await createTodo(task)).toEqual(todo);
   });
 
-  test("비어있는 todo 생성 요청", async () => {
+  it("비어있는 todo 생성 요청", async () => {
     server.use(
       rest.post(baseURL + TODO_ENDPOINT, (req, res, ctx) =>
         res(ctx.status(400))
