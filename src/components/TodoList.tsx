@@ -4,7 +4,7 @@ import TodoItem from "./TodoItem";
 function TodoList() {
   const { todos } = useTodos();
   return (
-    <ul>
+    <ul className="flex flex-col gap-4">
       {todos.map(({ todo, isCompleted, id }, idx) => {
         return (
           <TodoItem
