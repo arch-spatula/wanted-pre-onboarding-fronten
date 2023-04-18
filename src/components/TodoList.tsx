@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useTodos } from "../hooks";
 import TodoItem from "./TodoItem";
 
@@ -5,18 +6,13 @@ function TodoList() {
   const { todos } = useTodos();
   return (
     <ul className="flex flex-col gap-4">
-      {todos.map(({ todo, isCompleted, id }, idx) => {
+      {todos.map(({ todo, isCompleted, id }) => {
         return (
-          <TodoItem
-            id={id}
-            todo={todo}
-            isCompleted={isCompleted}
-            key={id && idx}
-          />
+          <TodoItem key={id} id={id} todo={todo} isCompleted={isCompleted} />
         );
       })}
     </ul>
   );
 }
 
-export default TodoList;
+export default memo(TodoList);
