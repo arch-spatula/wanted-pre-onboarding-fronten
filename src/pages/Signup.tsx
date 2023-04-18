@@ -20,7 +20,7 @@ function Signup() {
           value={inputValues.email}
           placeholder="user@user.com"
           onChange={handleInputChange("email")}
-          inputLabel={{ label: "email", id: "email" }}
+          inputLabel="email"
           errorMessage={validEmail}
           testId="email-input"
           customType="email"
@@ -30,7 +30,7 @@ function Signup() {
           value={inputValues.password}
           placeholder="8자리 이상 입력해주십시오."
           onChange={handleInputChange("password")}
-          inputLabel={{ label: "password", id: "password" }}
+          inputLabel="password"
           errorMessage={validPassword}
           testId="password-input"
           customType="password"

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
 /**
  * @param {{ [key: string]: string }} inputGroup
@@ -12,16 +12,16 @@ import { ChangeEvent, useState } from "react";
 function useInput<T extends { [key: string]: string }>(inputGroup: T) {
   const [inputValues, setInputValues] = useState(inputGroup);
 
-  const handleInputChange = (field: keyof T) => {
+  const handleInputChange = useCallback((field: keyof T) => {
     return (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setInputValues((prev) => ({
         ...prev,
         [field]: e.target.value,
       }));
     };
-  };
+  }, []);
 
-  const resetAllInput = () => {
+  const resetAllInput = useCallback(() => {
     const resetObject: { [key: string]: string } = {};
     setInputValues((prev) => {
       if (prev) {
@@ -32,14 +32,14 @@ function useInput<T extends { [key: string]: string }>(inputGroup: T) {
 
       return prev;
     });
-  };
+  }, []);
 
-  const resetSpecificInput = (field: keyof T) => {
+  const resetSpecificInput = useCallback((field: keyof T, val = "") => {
     setInputValues((prev) => ({
       ...prev,
-      [field]: "",
+      [field]: val,
     }));
-  };
+  }, []);
 
   return { handleInputChange, inputValues, resetAllInput, resetSpecificInput };
 }

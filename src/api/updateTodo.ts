@@ -14,7 +14,7 @@ async function updateTodo(id: number, todo: Omit<Todo, "id" | "userId">) {
     const client = todoClient();
     const res = await client.put(
       TODO_ENDPOINT + `/${id}`,
-      { todo },
+      todo,
       HEADERS_CONTENT_TYPE_APPLICATION_JSON
     );
     if (res.status === 200) return res.data;

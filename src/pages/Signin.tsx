@@ -67,7 +67,7 @@ function Signin() {
           value={inputValues.email}
           placeholder="user@user.com"
           onChange={handleInputChange("email")}
-          inputLabel={{ label: "아이디", id: "아이디" }}
+          inputLabel="아이디"
           errorMessage={validEmail || emailErrorMessage}
           customRef={emailRef}
           testId="email-input"
@@ -77,7 +77,7 @@ function Signin() {
           value={inputValues.password}
           placeholder="8자리 이상 입력해주십시오."
           onChange={handleInputChange("password")}
-          inputLabel={{ label: "비밀번호", id: "비밀번호" }}
+          inputLabel="비밀번호"
           errorMessage={validPassword || passwordErrorMessage}
           customRef={passwordRef}
           testId="password-input"
