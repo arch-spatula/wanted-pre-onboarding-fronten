@@ -11,7 +11,7 @@
 # 프로젝트의 실행 방법
 
 ```sh
-npm install & npm start
+npm install && npm start
 ```
 
 # 배포 링크(데모 영상 대체)
