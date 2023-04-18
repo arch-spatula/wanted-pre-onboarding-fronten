@@ -1,6 +1,7 @@
 import { memo, useId, useState } from "react";
 import { useInput, useTodos } from "../hooks";
 import CustomButton from "./common/CustomButton";
+import CustomCheckBox from "./common/CustomCheckBox";
 import CustomInput from "./common/CustomInput";
 
 function TodoItem({ id, todo, isCompleted }: Todo) {
@@ -35,11 +36,10 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
   };
 
   return (
-    <li>
-      <label htmlFor={markupId}>
-        <input
+    <li className="flex h-10 justify-start gap-4">
+      <label htmlFor={markupId} className="flex items-center gap-2">
+        <CustomCheckBox
           id={markupId}
-          type="checkbox"
           checked={checked}
           onChange={handleCheck}
         />
@@ -48,9 +48,10 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
             value={inputValues.editInput}
             onChange={handleInputChange("editInput")}
             testId="modify-input"
+            feedback={false}
           />
         ) : (
-          <span>{todo}</span>
+          <span className="w-64 truncate">{todo}</span>
         )}
       </label>
       {isEdit ? (
@@ -88,6 +89,4 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
   );
 }
 
-// 리렌더링이 발생하지 않으면 아래를 풀어둡니다.
 export default memo(TodoItem);
-// export default TodoItem;
