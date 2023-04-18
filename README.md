@@ -18,7 +18,7 @@ npm install & npm start
 
 시연영상 대신 아래 배포링크로 대신합니다.
 
-[배포링크]()
+[배포링크](https://wanted-pre-onboarding-frontend-mu-six.vercel.app/)
 
 # 참고
 
