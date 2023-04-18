@@ -9,6 +9,7 @@ function TodoItem({ id, todo, isCompleted }: Todo) {
   useEffect(() => {
     setChecked(isCompleted);
   }, [isCompleted]);
+  console.log(id, todo);
 
   const [isEdit, setIsEdit] = useState(false);
   const { inputValues, handleInputChange, resetSpecificInput } = useInput<{
